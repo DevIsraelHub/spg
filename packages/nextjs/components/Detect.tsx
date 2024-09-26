@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
-import axios from 'axios';
+import axios from "axios";
+import React, { useState } from "react";
 
 const Detect = () => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,19 +26,19 @@ const Detect = () => {
     try {
       const formData = new FormData();
       if (file) {
-        formData.append('file', file);
+        formData.append("file", file);
       } else {
-        formData.append('text', text);
+        formData.append("text", text);
       }
 
-      const response = await axios.post('/api/detect', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      const response = await axios.post("/api/detect", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       setResult(response.data.result);
     } catch (error) {
-      console.error('Error detecting content:', error);
-      setResult('Error detecting content');
+      console.error("Error detecting content:", error);
+      setResult("Error detecting content");
     } finally {
       setLoading(false); // Stop loading
     }
@@ -46,7 +46,9 @@ const Detect = () => {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">AI Detection Platform</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        AI Detection Platform
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Text Input */}
         <div>
@@ -62,7 +64,9 @@ const Detect = () => {
 
         {/* File Input */}
         <div>
-          <label className="block text-lg font-medium mb-2">Or Upload File:</label>
+          <label className="block text-lg font-medium mb-2">
+            Or Upload File:
+          </label>
           <input
             type="file"
             className="file-input file-input-bordered w-full"
@@ -76,7 +80,7 @@ const Detect = () => {
           className={`btn btn-primary w-full`}
           disabled={loading}
         >
-          {loading ? 'Detecting...' : 'Detect AI'}
+          {loading ? "Detecting..." : "Detect AI"}
         </button>
       </form>
 
@@ -84,7 +88,11 @@ const Detect = () => {
       {!loading && result && (
         <div className="mt-8 text-center">
           <h2 className="text-2xl font-bold">Detection Result:</h2>
-          <p className={`mt-4 text-xl ${result.includes('AI') ? 'text-red-600' : 'text-green-600'}`}>
+          <p
+            className={`mt-4 text-xl ${
+              result.includes("AI") ? "text-red-600" : "text-green-600"
+            }`}
+          >
             {result}
           </p>
         </div>

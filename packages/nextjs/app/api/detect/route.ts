@@ -1,32 +1,38 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const formData = await req.formData();
-  const text = formData.get('text') as string;
-  const file = formData.get('file') as File;
+  const text = formData.get("text") as string;
+  const file = formData.get("file") as File;
 
-  let result = '';
+  let result = "";
 
   // Simulate AI detection by checking for "AI-sounding" phrases
   if (text) {
-    const aiPhrases = ['neural', 'algorithm', 'deep learning', 'GPT', 'machine learning'];
-    const containsAIContent = aiPhrases.some((phrase) => text.toLowerCase().includes(phrase));
+    const aiPhrases = [
+      "neural",
+      "algorithm",
+      "deep learning",
+      "GPT",
+      "machine learning",
+    ];
+    const containsAIContent = aiPhrases.some((phrase) =>
+      text.toLowerCase().includes(phrase)
+    );
 
     result = containsAIContent
-      ? 'This content seems to be AI-generated.'
-      : 'This content seems to be human-made.';
+      ? "This content seems to be AI-generated."
+      : "This content seems to be human-made.";
   } else if (file) {
     // Simulate file detection (for now we just return a mock response)
-    result = 'File detection is not implemented yet. This is a placeholder result.';
+    result =
+      "File detection is not implemented yet. This is a placeholder result.";
   } else {
-    result = 'No content provided for detection.';
+    result = "No content provided for detection.";
   }
 
   return NextResponse.json({ result });
 }
-
-
-
 
 // /* eslint-disable @typescript-eslint/no-unused-vars */
 // import { NextRequest, NextResponse } from 'next/server';
