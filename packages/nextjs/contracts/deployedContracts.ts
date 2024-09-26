@@ -6,101 +6,47 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    SecurePaymentGateway: {
-      address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+    AIDetectionVerifier: {
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
-        {
-          inputs: [],
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
         {
           anonymous: false,
           inputs: [
             {
               indexed: true,
-              internalType: "address",
-              name: "payer",
-              type: "address",
+              internalType: "bytes32",
+              name: "contentHash",
+              type: "bytes32",
             },
             {
               indexed: false,
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-            {
-              indexed: false,
-              internalType: "string",
-              name: "message",
-              type: "string",
+              internalType: "bool",
+              name: "isAIGenerated",
+              type: "bool",
             },
           ],
-          name: "PaymentReceived",
+          name: "ContentVerified",
           type: "event",
         },
         {
           inputs: [
             {
-              internalType: "address",
-              name: "_user",
-              type: "address",
+              internalType: "bytes32",
+              name: "_contentHash",
+              type: "bytes32",
             },
           ],
-          name: "authorizeUser",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          name: "authorizedUsers",
+          name: "getVerificationResult",
           outputs: [
             {
               internalType: "bool",
               name: "",
               type: "bool",
             },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "getTransactions",
-          outputs: [
             {
-              components: [
-                {
-                  internalType: "address",
-                  name: "payer",
-                  type: "address",
-                },
-                {
-                  internalType: "uint256",
-                  name: "amount",
-                  type: "uint256",
-                },
-                {
-                  internalType: "string",
-                  name: "message",
-                  type: "string",
-                },
-                {
-                  internalType: "uint256",
-                  name: "timestamp",
-                  type: "uint256",
-                },
-              ],
-              internalType: "struct SecurePaymentGateway.Transaction[]",
+              internalType: "uint256",
               name: "",
-              type: "tuple[]",
+              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -109,53 +55,22 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "string",
-              name: "_message",
-              type: "string",
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
             },
           ],
-          name: "makePayment",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "owner",
+          name: "verifications",
           outputs: [
             {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "transactions",
-          outputs: [
-            {
-              internalType: "address",
-              name: "payer",
-              type: "address",
+              internalType: "bytes32",
+              name: "contentHash",
+              type: "bytes32",
             },
             {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "message",
-              type: "string",
+              internalType: "bool",
+              name: "isAIGenerated",
+              type: "bool",
             },
             {
               internalType: "uint256",
@@ -166,148 +81,23 @@ const deployedContracts = {
           stateMutability: "view",
           type: "function",
         },
-      ],
-      inheritedFunctions: {},
-    },
-    YourContract: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      abi: [
         {
           inputs: [
             {
-              internalType: "address",
-              name: "_owner",
-              type: "address",
+              internalType: "bytes32",
+              name: "_contentHash",
+              type: "bytes32",
             },
-          ],
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: true,
-              internalType: "address",
-              name: "greetingSetter",
-              type: "address",
-            },
-            {
-              indexed: false,
-              internalType: "string",
-              name: "newGreeting",
-              type: "string",
-            },
-            {
-              indexed: false,
-              internalType: "bool",
-              name: "premium",
-              type: "bool",
-            },
-            {
-              indexed: false,
-              internalType: "uint256",
-              name: "value",
-              type: "uint256",
-            },
-          ],
-          name: "GreetingChange",
-          type: "event",
-        },
-        {
-          inputs: [],
-          name: "greeting",
-          outputs: [
-            {
-              internalType: "string",
-              name: "",
-              type: "string",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "owner",
-          outputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "premium",
-          outputs: [
             {
               internalType: "bool",
-              name: "",
+              name: "_isAIGenerated",
               type: "bool",
             },
           ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "string",
-              name: "_newGreeting",
-              type: "string",
-            },
-          ],
-          name: "setGreeting",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "totalCounter",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          name: "userGreetingCounter",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "withdraw",
+          name: "verifyContent",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
-        },
-        {
-          stateMutability: "payable",
-          type: "receive",
         },
       ],
       inheritedFunctions: {},
